@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadar Isipadu Tong Oxygen Di Atas Ambulans - St John Ambulans Malaysia</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon Profesional & WhatsApp -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+        /* ==========================================================================
+           1. CSS VARIABLES & RESET (TEMA PUTIH, BIRU GELAP & BIRU MUDA)
+           ========================================================================== */
+        :root {
+            --primary-dark: #0a2540;      /* Biru Gelap Korporat */
+            --primary-blue: #1d4ed8;      /* Biru Utama */
+            --light-blue: #0ea5e9;        /* Biru Muda */
+            --light-blue-bg: #e0f2fe;     /* Latar Biru Muda Lembut */
+            --bg-body: #f1f5f9;           /* Kelabu Sangat Cerah / Putih Kebiruan */
+            --bg-card: #ffffff;           /* Putih Bersih */
+            --text-main: #0f172a;         /* Teks Gelap */
+            --text-muted: #64748b;        /* Teks Kelabu */
+            --border-color: #cbd5e1;      /* Garisan Sempadan */
+            --whatsapp-green: #25D366;    /* Hijau Rasmi WhatsApp */
+            --whatsapp-dark: #128C7E;     /* Hijau Gelap WhatsApp */
+            --danger-red: #dc2626;        /* Merah Padam */
+            --danger-dark: #b91c1c;
+            --warning-amber: #d97706;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(10, 37, 64, 0.08);
+            --shadow-lg: 0 10px 25px rgba(10, 37, 64, 0.15);
+        }
+
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+/* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #163a63 100%);
+            color: #ffffff;
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            border-bottom: 4px solid var(--light-blue);
+        }
+
+.header-container {
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+.brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+.brand-logo {
+            width: 52px;
+            height: 52px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-size: 1.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+.brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.brand-titles h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            line-height: 1.25;
+        }
+
+.brand-titles p {
+            font-size: 0.85rem;
+            color: #bae6fd;
+            font-weight: 500;
+            margin-top: 0.15rem;
+        }
+
+.header-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+/* ==========================================================================
+           3. LAYOUT CONTAINER & CARDS
+           ========================================================================== */
+        .main-container {
+            max-width: 1360px;
+            margin: 1.5rem auto 3rem;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+.card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+.card-header {
+            background-color: #f8fafc;
+            padding: 1.15rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+.card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+.card-title i {
+            color: var(--light-blue);
+            font-size: 1.15rem;
+        }
+
+.card-body {
+            padding: 1.5rem;
+        }
+
+/* ==========================================================================
+           4. DASHBOARD SUMMARY CARDS
+           ========================================================================== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+.stat-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 1.35rem 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+.stat-card:nth-child(2) {
+            border-left-color: var(--light-blue);
+        }
+
+.stat-card:nth-child(3) {
+            border-left-color: var(--primary-dark);
+        }
+
+.stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+.stat-info h3 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            margin-bottom: 0.35rem;
+        }
+
+.stat-info .stat-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.1;
+        }
+
+.stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background-color: var(--light-blue-bg);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+.stat-card:nth-child(2) .stat-icon {
+            background-color: #e0f2fe;
+            color: #0284c7;
+        }
+
+.stat-card:nth-child(3) .stat-icon {
+            background-color: #e2e8f0;
+            color: var(--primary-dark);
+        }
+
+/* ==========================================================================
+           5. FORM STYLES (MAKLUMAT AMBULANS & TONG OKSIGEN)
+           ========================================================================== */
+        .edit-banner {
+            display: none;
+            background-color: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 0.85rem 1.25rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.25rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+.edit-banner.active {
+            display: flex;
+        }
+
+.section-subtitle {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--light-blue-bg);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+.form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.15rem;
+            margin-bottom: 1.75rem;
+        }
+
+.form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+.form-group label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+.form-group label .required {
+            color: var(--danger-red);
+            margin-left: 2px;
+        }
+
+.form-control {
+            width: 100%;
+            padding: 0.75rem 0.95rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--text-main);
+            background-color: #ffffff;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            min-height: 46px;
+        }
+
+.form-control:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.18);
+        }
+
+.form-control[readonly] {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            cursor: not-allowed;
+        }
+
+/* Jadual Input Tong Oksigen */
+        .oxygen-input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.15rem;
+            margin-bottom: 1.5rem;
+        }
+
+.oxygen-box {
+            background-color: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 1rem 1.15rem;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+.oxygen-box:focus-within {
+            border-color: var(--light-blue);
+            background-color: #f0f9ff;
+        }
+
+.oxygen-box-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.65rem;
+        }
+
+.oxygen-badge {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+.oxygen-label {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+.psi-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+.psi-input-wrapper input {
+            padding-right: 3.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+.psi-unit {
+            position: absolute;
+            right: 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            background-color: var(--light-blue-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            pointer-events: none;
+        }
+
+.form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+/* ==========================================================================
+           6. BUTTONS (JELAS, MUDAH DITEKAN & RESPONSIVE)
+           ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 0.75rem 1.35rem;
+            font-size: 0.92rem;
+            font-weight: 700;
+            font-family: inherit;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.18s ease;
+            min-height: 46px;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+.btn:active {
+            transform: scale(0.98);
+        }
+
+.btn-primary {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(29, 78, 216, 0.25);
+        }
+
+.btn-primary:hover {
+            background-color: #1e40af;
+        }
+
+.btn-dark {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+        }
+
+.btn-dark:hover {
+            background-color: #1e293b;
+        }
+
+.btn-light-blue {
+            background-color: var(--light-blue);
+            color: #ffffff;
+        }
+
+.btn-light-blue:hover {
+            background-color: #0284c7;
+        }
+
+.btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--primary-dark);
+        }
+
+.btn-secondary:hover {
+            background-color: #cbd5e1;
+        }
+
+.btn-outline-white {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.55rem 1rem;
+            min-height: 40px;
+            font-size: 0.85rem;
+        }
+
+.btn-outline-white:hover {
+            background-color: rgba(255, 255, 255, 0.22);
+        }
+
+/* Butang Tindakan Jadual: VIEW (Biru), EDIT (Biru Muda), DELETE (Merah) */
+        .action-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            flex-wrap: nowrap;
+        }
+
+.btn-action {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 8px;
+            min-height: 38px;
+            white-space: nowrap;
+        }
+
+.btn-view {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+        }
+        .btn-view:hover {
+            background-color: #1e40af;
+        }
+
+.btn-edit {
+            background-color: var(--light-blue);
+            color: #ffffff;
+        }
+        .btn-edit:hover {
+            background-color: #0284c7;
+        }
+
+.btn-delete {
+            background-color: var(--danger-red);
+            color: #ffffff;
+        }
+        .btn-delete:hover {
+            background-color: var(--danger-dark);
+        }
+
+/* BUTANG KHAS SHARE TO WHATSAPP (BESAR, HIJAU, RUANGAN BERASINGAN) */
+        .btn-whatsapp-share {
+            background-color: var(--whatsapp-green);
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 800;
+            padding: 0.65rem 1.15rem;
+            min-height: 44px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(37, 211, 102, 0.35);
+            white-space: nowrap;
+            letter-spacing: 0.02em;
+            border: 1px solid #1ebe5d;
+        }
+
+.btn-whatsapp-share:hover {
+            background-color: var(--whatsapp-dark);
+            box-shadow: 0 4px 12px rgba(18, 140, 126, 0.4);
+        }
+
+.btn-whatsapp-share i {
+            font-size: 1.25rem;
+        }
+
+/* ==========================================================================
+   7. HISTORY RECORDS - RESPONSIVE CARD DESIGN
+   Tiada horizontal scrolling, tiada tajuk bertindih
+   ========================================================================== */
+
+.search-bar-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.search-input-box {
+    position: relative;
+    flex: 1 1 320px;
+    max-width: 500px;
+}
+
+.search-input-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.search-input-box input {
+    padding-left: 2.65rem;
+}
+
+/* Buang scroll mendatar */
+.mobile-scroll-hint {
+    display: none !important;
+}
+
+.table-responsive {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+    border: none;
+    background: transparent;
+}
+
+/* Jadual menjadi paparan kad */
+#recordsTable {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#recordsTable thead {
+    display: none;
+}
+
+#recordsTable tbody {
+    display: block;
+    width: 100%;
+}
+
+/* Setiap rekod menjadi satu kad */
+#recordsTable tbody tr {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #dce5ee;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+#recordsTable tbody tr:nth-child(even) {
+    background: #ffffff;
+}
+
+#recordsTable tbody tr:hover {
+    background: #ffffff;
+}
+
+/* Setiap maklumat dalam kad */
+#recordsTable tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 0;
+    padding: 12px 10px;
+    border-bottom: 1px solid #edf1f5;
+    text-align: right;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    background: transparent;
+}
+
+/* Label automatik berdasarkan kedudukan lajur */
+#recordsTable tbody td::before {
+    flex: 0 1 45%;
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 0.76rem;
+    text-align: left;
+}
+
+#recordsTable tbody td:nth-child(1)::before {
+    content: "Bil.";
+}
+
+#recordsTable tbody td:nth-child(2)::before {
+    content: "Nama Ambulans";
+}
+
+#recordsTable tbody td:nth-child(3)::before {
+    content: "Tarikh";
+}
+
+#recordsTable tbody td:nth-child(4)::before {
+    content: "Hari";
+}
+
+#recordsTable tbody td:nth-child(5)::before {
+    content: "Masa";
+}
+
+#recordsTable tbody td:nth-child(6)::before {
+    content: "Nama Petugas";
+}
+
+#recordsTable tbody td:nth-child(7)::before {
+    content: "Tong Oxygen 1 (1.4)";
+}
+
+#recordsTable tbody td:nth-child(8)::before {
+    content: "Tong Oxygen 2 (1.4)";
+}
+
+#recordsTable tbody td:nth-child(9)::before {
+    content: "Tong Oxygen 1 (0.7) - Tong 3";
+}
+
+tbody td:nth-child(10)::before {
+    content: "Tong Oxygen 1 (0.7) - Tong 4";
+}
+
+tbody td:nth-child(11)::before {
+    content: "Portable HK Kecil (0.7)";
+}
+
+tbody td:nth-child(12)::before {
+    content: "TINDAKAN";
+}
+
+tbody td:nth-child(13)::before {
+    content: "WHATSAPP";
+}
+/* Nilai PSI */
+.psi-pill {
+    display: inline-block;
+    background: var(--light-blue-bg);
+    color: var(--primary-dark);
+    font-weight: 800;
+    padding: 6px 10px;
+    border-radius: 7px;
+    white-space: nowrap;
+    font-size: 0.82rem;
+}
+
+/* Ruangan tindakan - berasingan */
+#recordsTable tbody td.cell-tindakan {
+    grid-column: 1 / -1;
+    display: block;
+    text-align: left;
+    padding: 14px 10px;
+    background: #f5f8fc;
+    border-radius: 8px;
+}
+
+#recordsTable tbody td.cell-tindakan::before {
+    content: "TINDAKAN REKOD";
+    display: block;
+    margin-bottom: 12px;
+    max-width: 100%;
+}
+
+/* Butang VIEW, EDIT dan DELETE */
+.action-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.btn-action {
+    padding: 9px 14px;
+    min-height: 40px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+/* Ruangan WhatsApp - hijau dan berasingan */
+#recordsTable tbody td.cell-whatsapp {
+    grid-column: 1 / -1;
+    display: block;
+    text-align: left;
+    padding: 14px 10px;
+    background: #f0fdf4;
+    border: 1px solid #dcfce7;
+    border-radius: 8px;
+}
+
+#recordsTable tbody td.cell-whatsapp::before {
+    content: "KONGSI REKOD";
+    display: block;
+    margin-bottom: 12px;
+    max-width: 100%;
+}
+
+.btn-whatsapp-share {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 350px;
+    min-height: 48px;
+    padding: 12px;
+    background: var(--whatsapp-green);
+    color: #ffffff;
+    border-radius: 9px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    white-space: normal;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-whatsapp-share:hover {
+    background: var(--whatsapp-dark);
+}
+
+/* Paparan apabila tiada rekod */
+#recordsTable tbody tr:has(td[colspan="13"]) {
+    display: block;
+    padding: 0;
+    box-shadow: none;
+}
+
+#recordsTable tbody td[colspan="13"] {
+    display: block;
+    width: 100%;
+    padding: 3rem 1rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+#recordsTable tbody td[colspan="13"]::before {
+    content: none;
+}
+/* Tablet */
+@media screen and (max-width: 900px) {
+    #recordsTable tbody tr {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Telefon */
+@media screen and (max-width: 600px) {
+    #recordsTable tbody tr {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+#recordsTable tbody td {
+        font-size: 0.82rem;
+    }
+
+#recordsTable tbody td.cell-tindakan,
+    #recordsTable tbody td.cell-whatsapp {
+        grid-column: 1 / -1;
+    }
+
+.action-group {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+.btn-action {
+        padding: 9px 4px;
+        font-size: 0.7rem;
+    }
+
+.btn-whatsapp-share {
+        max-width: 100%;
+    }
+}
+
+/* ==========================================================================
+           8. MODALS (VIEW RECORD & CONFIRM DELETE)
+           ========================================================================== */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(10, 37, 64, 0.65);
+            backdrop-filter: blur(3px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+.modal-backdrop.active {
+            display: flex;
+        }
+
+.modal-dialog {
+            background-color: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 560px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: modalPop 0.2s ease-out;
+        }
+
+@keyframes modalPop {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+.modal-header {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            padding: 1.15rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+.modal-header.danger {
+            background-color: var(--danger-red);
+        }
+
+.modal-header h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+.modal-close {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.35rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+        }
+
+.modal-body {
+            padding: 1.5rem;
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+
+.detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+            margin-bottom: 1.25rem;
+        }
+
+.detail-item {
+            background-color: #f8fafc;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+.detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+.detail-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+
+.detail-value {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+.oxygen-detail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+.oxygen-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+        }
+
+.oxygen-detail-row span:first-child {
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 0.9rem;
+        }
+
+.oxygen-detail-row span:last-child {
+            font-weight: 800;
+            color: var(--primary-blue);
+            font-size: 1.05rem;
+        }
+
+.modal-footer {
+            padding: 1rem 1.5rem;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+/* ==========================================================================
+           9. TOAST NOTIFICATION
+           ========================================================================== */
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            max-width: calc(100vw - 2rem);
+        }
+
+.toast {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            padding: 0.95rem 1.25rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border-left: 5px solid var(--light-blue);
+            animation: slideInRight 0.25s ease-out;
+        }
+
+.toast.success {
+            border-left-color: var(--whatsapp-green);
+        }
+
+.toast.danger {
+            border-left-color: var(--danger-red);
+        }
+
+@keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+/* ==========================================================================
+           10. RESPONSIVE & PRINT STYLES
+           ========================================================================== */
+        @media (max-width: 640px) {
+            .app-header {
+                padding: 1rem;
+            }
+            .brand-titles h1 {
+                font-size: 1rem;
+            }
+            .card-body {
+                padding: 1.1rem;
+            }
+            .form-actions .btn {
+                width: 100%;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .toast-container {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1rem;
+            }
+        }
+
+@media print {
+            body {
+                background-color: #ffffff;
+            }
+            .app-header {
+                position: static;
+                background: #0a2540 !important;
+                color: #000000 !important;
+                border-bottom: 2px solid #000;
+                box-shadow: none;
+            }
+            .brand-titles h1, .brand-titles p {
+                color: #000000 !important;
+            }
+            .header-actions,
+            #formSection,
+            .search-bar-container,
+            .mobile-scroll-hint,
+            .col-tindakan,
+            .cell-tindakan,
+            .col-whatsapp,
+            .cell-whatsapp,
+            .toast-container,
+            .modal-backdrop {
+                display: none !important;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+            .table-responsive {
+                overflow: visible;
+                border: none;
+            }
+            table {
+                font-size: 11px;
+            }
+            thead th {
+                background-color: #e2e8f0 !important;
+                color: #000000 !important;
+                border: 1px solid #000;
+            }
+            tbody td {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ======================================================================
+         HEADER UTAMA SISTEM
+         ====================================================================== -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand-section">
+                <div class="brand-logo">
+    <img
+        src="https://drive.google.com/thumbnail?id=1pK6y_OwLU5_VIMB9nC1SE_9OG-sFIerT&sz=w1000"
+        alt="Logo St John Ambulans Malaysia"
+    >
+</div>    
+            <div class="brand-titles">
+                    <h1>KADAR ISIPADU TONG OXYGEN DI ATAS AMBULANS</h1>
+                    <p><i class="fa-solid fa-star-of-life"></i> St John Ambulans Malaysia — Sistem Pemantauan & Rekod PSI</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button type="button" class="btn btn-outline-white" id="btnPrint" title="Cetak atau Simpan sebagai PDF">
+                    <i class="fa-solid fa-print"></i> Print / Save as PDF
+                </button>
+                <button type="button" class="btn btn-outline-white" id="btnExportCsv" title="Muat turun rekod dalam format CSV">
+                    <i class="fa-solid fa-file-csv"></i> Export CSV
+                </button>
+            </div>
+        </div>
+    </header>
+
+<main class="main-container">
+
+<!-- ==================================================================
+             1. DASHBOARD STATISTIK
+             ================================================================== -->
+        <section aria-label="Ringkasan Statistik">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Jumlah Rekod Pemeriksaan</h3>
+                        <div class="stat-value" id="statTotalRecords">0</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                </div>
+
+<div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Jumlah Ambulans Direkodkan</h3>
+                        <div class="stat-value" id="statTotalAmbulances">0</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-ambulance"></i>
+                    </div>
+                </div>
+
+<div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Tarikh Pemeriksaan Terakhir</h3>
+                        <div class="stat-value" id="statLastDate" style="font-size: 1.35rem;">Tiada Rekod</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-calendar-day"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- ==================================================================
+             2. BORANG MAKLUMAT PEMERIKSAAN
+             ================================================================== -->
+        <section class="card" id="formSection">
+            <div class="card-header">
+                <h2 class="card-title" id="formHeading">
+                    <i class="fa-solid fa-file-medical"></i> Borang Rekod Pemeriksaan Tong Oksigen
+                </h2>
+                <span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 500;">
+                    * Sila pastikan bacaan PSI tepat sebelum disimpan
+                </span>
+            </div>
+            <div class="card-body">
+                <!-- Banner Mod Edit -->
+                <div class="edit-banner" id="editBanner">
+                    <span><i class="fa-solid fa-pen-to-square"></i> MOD KEMASKINI: Anda sedang mengedit rekod sedia ada.</span>
+                    <button type="button" class="btn btn-secondary" id="btnCancelEdit" style="min-height: 36px; padding: 0.35rem 0.85rem; font-size: 0.82rem;">
+                        Batal Edit
+                    </button>
+                </div>
+
+<form id="oxygenForm" autocomplete="off">
+                    <input type="hidden" id="recordId" value="">
+
+<!-- Bahagian A: Maklumat Ambulans -->
+                    <div class="section-subtitle">
+                        <i class="fa-solid fa-truck-medical"></i> Maklumat Ambulans & Petugas
+                    </div>
+
+<div class="form-grid">
+                        <div class="form-group">
+                            <label for="ambulanceName">Nama / Nombor Ambulans <span class="required">*</span></label>
+                            <input type="text" id="ambulanceName" class="form-control" placeholder="Contoh: SJAM WXY 1234 / Unit 01" required>
+                        </div>
+
+<div class="form-group">
+                            <label for="inspectionDate">Tarikh Pemeriksaan <span class="required">*</span></label>
+                            <input type="date" id="inspectionDate" class="form-control" required>
+                        </div>
+
+<div class="form-group">
+                            <label for="inspectionDay">Hari (Automatik)</label>
+                            <input type="text" id="inspectionDay" class="form-control" readonly placeholder="Dijana automatik">
+                        </div>
+
+<div class="form-group">
+                            <label for="inspectionTime">Masa Pemeriksaan <span class="required">*</span></label>
+                            <input type="time" id="inspectionTime" class="form-control" required>
+                        </div>
+
+<div class="form-group">
+                            <label for="officerName">Nama Petugas <span class="required">*</span></label>
+                            <input type="text" id="officerName" class="form-control" placeholder="Nama penuh petugas bertugas" required>
+                        </div>
+                    </div>
+
+<!-- Bahagian B: Maklumat Tong Oksigen -->
+                    <div class="section-subtitle">
+                        <i class="fa-solid fa-gauge-high"></i> Bacaan Tekanan Tong Oksigen (PSI)
+                    </div>
+
+<div class="oxygen-input-grid">
+
+<!-- Tong 1 -->
+    <div class="oxygen-box">
+        <div class="oxygen-box-header">
+            <span class="oxygen-badge">1</span>
+            <label for="oxy1_14" class="oxygen-label">
+                Tong Oxygen 1 (1.4)
+            </label>
+        </div>
+        <div class="psi-input-wrapper">
+            <input type="number" id="oxy1_14"
+                class="form-control"
+                min="0" max="5000"
+                step="1"
+                inputmode="numeric"
+                placeholder="Masukkan PSI">
+            <span class="psi-unit">PSI</span>
+        </div>
+    </div>
+
+<!-- Tong 2 -->
+    <div class="oxygen-box">
+        <div class="oxygen-box-header">
+            <span class="oxygen-badge">2</span>
+            <label for="oxy2_14" class="oxygen-label">
+                Tong Oxygen 2 (1.4)
+            </label>
+        </div>
+        <div class="psi-input-wrapper">
+            <input type="number" id="oxy2_14"
+                class="form-control"
+                min="0" max="5000"
+                step="1"
+                inputmode="numeric"
+                placeholder="Masukkan PSI">
+            <span class="psi-unit">PSI</span>
+        </div>
+    </div>
+
+<!-- Tong 3 -->
+    <div class="oxygen-box">
+        <div class="oxygen-box-header">
+            <span class="oxygen-badge">3</span>
+            <label for="oxy1_07" class="oxygen-label">
+                Tong Oxygen 1 (0.7)
+            </label>
+        </div>
+        <div class="psi-input-wrapper">
+            <input type="number" id="oxy1_07"
+                class="form-control"
+                min="0" max="5000"
+                step="1"
+                inputmode="numeric"
+                placeholder="Masukkan PSI">
+            <span class="psi-unit">PSI</span>
+        </div>
+    </div>
+
+<!-- Tong 4 -->
+    <div class="oxygen-box">
+        <div class="oxygen-box-header">
+            <span class="oxygen-badge">4</span>
+            <label for="oxy1_07_second" class="oxygen-label">
+                Tong Oxygen 2 (0.7)
+            </label>
+        </div>
+        <div class="psi-input-wrapper">
+            <input type="number" id="oxy1_07_second"
+                class="form-control"
+                min="0" max="5000"
+                step="1"
+                inputmode="numeric"
+                placeholder="Masukkan PSI">
+            <span class="psi-unit">PSI</span>
+        </div>
+    </div>
+
+<!-- Tong 5 -->
+    <div class="oxygen-box">
+        <div class="oxygen-box-header">
+            <span class="oxygen-badge">5</span>
+            <label for="oxyPortable_07" class="oxygen-label">
+                Tong Oxygen Portable HK Kecil (0.7)
+            </label>
+        </div>
+        <div class="psi-input-wrapper">
+            <input type="number" id="oxyPortable_07"
+                class="form-control"
+                min="0" max="5000"
+                step="1"
+                inputmode="numeric"
+                placeholder="Masukkan PSI">
+            <span class="psi-unit">PSI</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- Butang Simpan & Kosongkan Borang -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="btnSaveRecord">
+                            <i class="fa-solid fa-floppy-disk"></i> <span id="btnSaveText">SAVE RECORD</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="btnClearForm">
+                            <i class="fa-solid fa-eraser"></i> CLEAR FORM
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+<!-- ==================================================================
+             3. HISTORY OF OXYGEN PRESSURE RECORDS
+             ================================================================== -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fa-solid fa-clock-rotate-left"></i> HISTORY OF OXYGEN PRESSURE RECORDS
+                </h2>
+                <span id="recordCountBadge" style="background: var(--light-blue-bg); color: var(--primary-dark); padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.82rem; font-weight: 700;">
+                    0 Rekod
+                </span>
+            </div>
+            <div class="card-body">
+                <!-- Bar Carian -->
+                <div class="search-bar-container">
+                    <div class="search-input-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Cari Nama Ambulans, Tarikh (YYYY-MM-DD), atau Nama Petugas...">
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="btnResetSearch" style="min-height: 44px; display: none;">
+                        <i class="fa-solid fa-xmark"></i> Reset Carian
+                    </button>
+                </div>
+
+<!-- Petunjuk Visual Horizontal Scroll untuk Telefon Pintar / Tablet -->
+                <!-- Paparan jadual tanpa arahan scroll kiri dan kanan -->
+<!-- Jadual Rekod -->
+                <div class="table-responsive">
+                    <table id="recordsTable">
+                        <thead>
+                            <tr>
+                                <th>Bil.</th>
+                                <th>Nama Ambulans</th>
+                                <th>Tarikh</th>
+                                <th>Hari</th>
+                                <th>Masa</th>
+                                <th>Nama Petugas</th>
+                                <th>Tong Oxygen 1 (1.4)</th>
+<th>Tong Oxygen 2 (1.4)</th>
+<th>Tong Oxygen 1 (0.7) - Tong 3</th>
+<th>Tong Oxygen 1 (0.7) - Tong 4</th>
+<th>Tong Oxygen Portable HK Kecil (0.7)</th>
+
+<th class="col-tindakan">Tindakan</th>
+<th class="col-whatsapp">Share WhatsApp</th>                            </tr>
+                        </thead>
+                        <tbody id="recordsTableBody">
+                            <!-- Rekod akan dijana secara dinamik oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+</main>
+
+<!-- ======================================================================
+         MODAL 1: VIEW RECORD (PAPARAN TERPERINCI)
+         ====================================================================== -->
+    <div class="modal-backdrop" id="viewModal" role="dialog" aria-modal="true" aria-labelledby="viewModalTitle">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="viewModalTitle"><i class="fa-solid fa-file-lines"></i> Butiran Lengkap Rekod Pemeriksaan</h3>
+                <button type="button" class="modal-close" id="closeViewModal" aria-label="Tutup">×</button>
+            </div>
+            <div class="modal-body" id="viewModalBody">
+                <!-- Kandungan diisi oleh JS -->
+            </div>
+            <div class="modal-footer">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-share" id="modalWhatsappBtn">
+                    <i class="fa-brands fa-whatsapp"></i> SHARE TO WHATSAPP
+                </a>
+                <button type="button" class="btn btn-secondary" id="btnCloseViewFooter">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+<!-- ======================================================================
+         MODAL 2: PENGESAHAN PADAM REKOD (GANTI CONFIRM BROWSER)
+         ====================================================================== -->
+    <div class="modal-backdrop" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+        <div class="modal-dialog" style="max-width: 440px;">
+            <div class="modal-header danger">
+                <h3 id="deleteModalTitle"><i class="fa-solid fa-triangle-exclamation"></i> Pengesahan Pemadaman</h3>
+                <button type="button" class="modal-close" id="closeDeleteModal" aria-label="Tutup">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 0.75rem;">
+                    Adakah anda pasti mahu memadam rekod pemeriksaan berikut?
+                </p>
+                <div id="deleteRecordSummary" style="background: #fef2f2; border: 1px solid #fecaca; padding: 0.85rem; border-radius: 8px; font-size: 0.88rem; color: #991b1b; font-weight: 600;">
+                </div>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.75rem;">
+                    Tindakan ini tidak boleh dikembalikan setelah dipadam.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnCancelDelete">Batal</button>
+                <button type="button" class="btn btn-delete" id="btnConfirmDelete" style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">
+                    <i class="fa-solid fa-trash-can"></i> Ya, Padam Rekod
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- ======================================================================
+         TOAST NOTIFICATION CONTAINER
+         ====================================================================== -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- ======================================================================
+         VANILLA JAVASCRIPT (LOGIK LENGKAP APLIKASI)
+         ====================================================================== -->
+    <script>
+        /**
+         * SISTEM KADAR ISIPADU TONG OXYGEN DI ATAS AMBULANS
+         * St John Ambulans Malaysia
+         * Penyimpanan Data: Local Storage (Tiada data contoh dimasukkan)
+         */
+
+        (function () {
+            'use strict';
+
+            // Kunci Local Storage
+            const STORAGE_KEY = 'sjam_oxygen_psi_records_v1';
+
+            // Senarai nama hari dalam Bahasa Melayu
+            const MALAY_DAYS = [
+                'Ahad',
+                'Isnin',
+                'Selasa',
+                'Rabu',
+                'Khamis',
+                'Jumaat',
+                'Sabtu'
+            ];
+
+            // State Aplikasi
+            let records = [];
+            let recordIdToDelete = null;
+
+            // Rujukan Elemen DOM
+            const oxygenForm = document.getElementById('oxygenForm');
+            const recordIdInput = document.getElementById('recordId');
+            const ambulanceNameInput = document.getElementById('ambulanceName');
+            const inspectionDateInput = document.getElementById('inspectionDate');
+            const inspectionDayInput = document.getElementById('inspectionDay');
+            const inspectionTimeInput = document.getElementById('inspectionTime');
+            const officerNameInput = document.getElementById('officerName');
+
+            const oxy1_14Input = document.getElementById('oxy1_14');
+            const oxy2_14Input = document.getElementById('oxy2_14');
+            const oxy1_07Input = document.getElementById('oxy1_07');
+
+const oxy1_07_secondInput =
+    document.getElementById('oxy1_07_second');
+
+const oxyPortable_07Input =
+    document.getElementById('oxyPortable_07');
+
+            const editBanner = document.getElementById('editBanner');
+            const btnCancelEdit = document.getElementById('btnCancelEdit');
+            const btnSaveText = document.getElementById('btnSaveText');
+            const btnClearForm = document.getElementById('btnClearForm');
+
+            const searchInput = document.getElementById('searchInput');
+            const btnResetSearch = document.getElementById('btnResetSearch');
+            const recordsTableBody = document.getElementById('recordsTableBody');
+            const recordCountBadge = document.getElementById('recordCountBadge');
+
+            // Rujukan Elemen Dashboard
+            const statTotalRecords = document.getElementById('statTotalRecords');
+            const statTotalAmbulances = document.getElementById('statTotalAmbulances');
+            const statLastDate = document.getElementById('statLastDate');
+
+            // Rujukan Modal View & Delete
+            const viewModal = document.getElementById('viewModal');
+            const viewModalBody = document.getElementById('viewModalBody');
+            const modalWhatsappBtn = document.getElementById('modalWhatsappBtn');
+            const closeViewModal = document.getElementById('closeViewModal');
+            const btnCloseViewFooter = document.getElementById('btnCloseViewFooter');
+
+            const deleteModal = document.getElementById('deleteModal');
+            const deleteRecordSummary = document.getElementById('deleteRecordSummary');
+            const closeDeleteModal = document.getElementById('closeDeleteModal');
+            const btnCancelDelete = document.getElementById('btnCancelDelete');
+            const btnConfirmDelete = document.getElementById('btnConfirmDelete');
+
+            // Rujukan Butang Header
+            const btnPrint = document.getElementById('btnPrint');
+            const btnExportCsv = document.getElementById('btnExportCsv');
+
+            /**
+             * 1. FUNGSI UTILITI TARIKH, HARI & MASA
+             */
+            function getMalayDayFromDateString(dateStr) {
+                if (!dateStr) return '';
+                const parts = dateStr.split('-');
+                if (parts.length !== 3) return '';
+                const year = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10) - 1;
+                const day = parseInt(parts[2], 10);
+                const dateObj = new Date(year, month, day);
+                return MALAY_DAYS[dateObj.getDay()] || '';
+            }
+
+            function formatDisplayDate(dateStr) {
+                if (!dateStr) return '-';
+                const parts = dateStr.split('-');
+                if (parts.length !== 3) return dateStr;
+                return `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+
+            function setDefaultDateTime() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const todayStr = `${year}-${month}-${day}`;
+
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const timeStr = `${hours}:${minutes}`;
+
+                inspectionDateInput.value = todayStr;
+                inspectionDayInput.value = getMalayDayFromDateString(todayStr);
+                inspectionTimeInput.value = timeStr;
+            }
+
+            function generateUniqueId() {
+                return 'SJAM-' + Date.now() + '-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+            }
+
+            function escapeHTML(str) {
+                if (str === null || str === undefined) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            /**
+             * 2. NOTIFIKASI TOAST
+             */
+            function showToast(message, type = 'success') {
+                const container = document.getElementById('toastContainer');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+
+                let iconClass = 'fa-circle-check';
+                if (type === 'danger') iconClass = 'fa-trash-can';
+                if (type === 'info') iconClass = 'fa-circle-info';
+
+                toast.innerHTML = `<i class="fa-solid ${iconClass}"></i><span>${escapeHTML(message)}</span>`;
+                container.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateX(100%)';
+                    toast.style.transition = 'all 0.25s ease';
+                    setTimeout(() => toast.remove(), 260);
+                }, 3200);
+            }
+
+            /**
+             * 3. PENGURUSAN LOCAL STORAGE
+             */
+            function loadRecordsFromStorage() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        records = Array.isArray(parsed) ? parsed : [];
+                    } else {
+                        records = [];
+                    }
+                } catch (error) {
+                    console.error('Ralat membaca Local Storage:', error);
+                    records = [];
+                }
+            }
+
+            function saveRecordsToStorage() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+                } catch (error) {
+                    console.error('Ralat menyimpan ke Local Storage:', error);
+                    showToast('Gagal menyimpan data ke storan pelayar.', 'danger');
+                }
+            }
+
+            /**
+             * 4. KEMASKINI DASHBOARD STATISTIK
+             */
+            function updateDashboard() {
+                // 1. Jumlah rekod pemeriksaan
+                statTotalRecords.textContent = records.length;
+
+                // 2. Jumlah ambulans unik yang direkodkan
+                const uniqueAmbulances = new Set(
+                    records.map(r => r.ambulanceName.trim().toUpperCase())
+                );
+                statTotalAmbulances.textContent = uniqueAmbulances.size;
+
+                // 3. Tarikh pemeriksaan terakhir
+                if (records.length === 0) {
+                    statLastDate.textContent = 'Tiada Rekod';
+                } else {
+                    // Cari tarikh & masa paling terkini
+                    const sortedByDate = [...records].sort((a, b) => {
+                        const dtA = `${a.date}T${a.time || '00:00'}`;
+                        const dtB = `${b.date}T${b.time || '00:00'}`;
+                        return dtB.localeCompare(dtA);
+                    });
+                    const latest = sortedByDate[0];
+                    statLastDate.textContent = `${formatDisplayDate(latest.date)} (${latest.time})`;
+                }
+            }
+
+            /**
+             * 5. PENJANAAN PAUTAN WHATSAPP RASMI (https://wa.me/?text=)
+             */
+            function buildWhatsAppShareUrl(record) {
+                const messageLines = [
+                    '*LAPORAN KADAR ISIPADU TONG OXYGEN DI ATAS AMBULANS*',
+                    '*ST JOHN AMBULANS MALAYSIA*',
+                    '----------------------------------',
+                    `*Nama / No. Ambulans:* ${record.ambulanceName}`,
+                    `*Tarikh:* ${formatDisplayDate(record.date)} (${record.day})`,
+                    `*Masa:* ${record.time}`,
+                    `*Nama Petugas:* ${record.officerName}`,
+                    '----------------------------------',
+                    '*BACAAN TEKANAN OKSIGEN (PSI):*',
+                    `1. Tong Oxygen 1 (1.4): ${record.oxy1_14 !== '' && record.oxy1_14 != null ? record.oxy1_14 + ' PSI' : 'Tidak Diisi'}`,
+`2. Tong Oxygen 2 (1.4): ${record.oxy2_14 !== '' && record.oxy2_14 != null ? record.oxy2_14 + ' PSI' : 'Tidak Diisi'}`,
+`3. Tong Oxygen 1 (0.7): ${record.oxy1_07 !== '' && record.oxy1_07 != null ? record.oxy1_07 + ' PSI' : 'Tidak Diisi'}`,
+`4. Tong Oxygen 1 (0.7): ${record.oxy1_07_second !== '' && record.oxy1_07_second != null ? record.oxy1_07_second + ' PSI' : 'Tidak Diisi'}`,
+`5. Tong Oxygen Portable HK Kecil (0.7): ${record.oxyPortable_07 !== '' && record.oxyPortable_07 != null ? record.oxyPortable_07 + ' PSI' : 'Tidak Diisi'}`,
+                    '----------------------------------',
+                    '_Direkodkan melalui Sistem Pemantauan Oksigen SJAM_'
+                ];
+
+                const encodedText = encodeURIComponent(messageLines.join('\n'));
+                return `https://wa.me/?text=${encodedText}`;
+            }
+
+            /**
+             * 6. PAPARAN JADUAL REKOD (DENGAN PENGASINGAN RUANGAN TINDAKAN & SHARE WHATSAPP)
+             */
+            function renderRecordsTable() {
+                const query = searchInput.value.trim().toLowerCase();
+                btnResetSearch.style.display = query ? 'inline-flex' : 'none';
+
+                const filteredRecords = records.filter(rec => {
+                    if (!query) return true;
+                    const ambMatch = rec.ambulanceName.toLowerCase().includes(query);
+                    const dateMatch = rec.date.toLowerCase().includes(query) || formatDisplayDate(rec.date).includes(query);
+                    const officerMatch = rec.officerName.toLowerCase().includes(query);
+                    return ambMatch || dateMatch || officerMatch;
+                });
+
+                recordCountBadge.textContent = `${filteredRecords.length} Rekod`;
+
+                if (filteredRecords.length === 0) {
+                    recordsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="13">               
+                 <div class="empty-state">
+                                    <i class="fa-solid fa-folder-open"></i>
+                                    <p>${query ? 'Tiada rekod sepadan dengan carian anda.' : 'Belum ada rekod pemeriksaan disimpan.'}</p>
+                                    <span>${query ? 'Sila cuba kata kunci nama ambulans, tarikh, atau petugas lain.' : 'Sila lengkapkan borang di atas dan tekan SAVE RECORD.'}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                recordsTableBody.innerHTML = filteredRecords.map((rec, index) => {
+                    const waUrl = buildWhatsAppShareUrl(rec);
+                    return `
+                        <tr>
+                            <td style="font-weight: 700; color: var(--text-muted);">${index + 1}</td>
+                            <td style="font-weight: 700; color: var(--primary-dark);">${escapeHTML(rec.ambulanceName)}</td>
+                            <td style="white-space: nowrap;">${escapeHTML(formatDisplayDate(rec.date))}</td>
+                            <td>${escapeHTML(rec.day)}</td>
+                            <td style="white-space: nowrap;">${escapeHTML(rec.time)}</td>
+                            <td style="font-weight: 500;">${escapeHTML(rec.officerName)}</td>
+                                         <td><span class="psi-pill">${rec.oxy1_14 !== '' && rec.oxy1_14 != null ? escapeHTML(rec.oxy1_14) + ' PSI' : 'Tidak Diisi'}</span></td>
+
+<td><span class="psi-pill">${rec.oxy2_14 !== '' && rec.oxy2_14 != null ? escapeHTML(rec.oxy2_14) + ' PSI' : 'Tidak Diisi'}</span></td>
+
+<td><span class="psi-pill">${rec.oxy1_07 !== '' && rec.oxy1_07 != null ? escapeHTML(rec.oxy1_07) + ' PSI' : 'Tidak Diisi'}</span></td>
+
+<td><span class="psi-pill">${rec.oxy1_07_second !== '' && rec.oxy1_07_second != null ? escapeHTML(rec.oxy1_07_second) + ' PSI' : 'Tidak Diisi'}</span></td>
+
+<td><span class="psi-pill">${rec.oxyPortable_07 !== '' && rec.oxyPortable_07 != null ? escapeHTML(rec.oxyPortable_07) + ' PSI' : 'Tidak Diisi'}</span></td>               
+                            <!-- RUANGAN 1: TINDAKAN BIASA (VIEW, EDIT, DELETE SAHAJA) -->
+                            <td class="cell-tindakan">
+                                <div class="action-group">
+                                    <button type="button" class="btn btn-action btn-view" data-action="view" data-id="${escapeHTML(rec.id)}" title="Lihat Rekod Penuh">
+                                        <i class="fa-solid fa-eye"></i> VIEW
+                                    </button>
+                                    <button type="button" class="btn btn-action btn-edit" data-action="edit" data-id="${escapeHTML(rec.id)}" title="Edit Rekod">
+                                        <i class="fa-solid fa-pen"></i> EDIT
+                                    </button>
+                                    <button type="button" class="btn btn-action btn-delete" data-action="delete" data-id="${escapeHTML(rec.id)}" title="Padam Rekod">
+                                        <i class="fa-solid fa-trash"></i> DELETE
+                                    </button>
+                                </div>
+                            </td>
+
+                            <!-- RUANGAN 2: RUANGAN BERASINGAN UNTUK SHARE TO WHATSAPP -->
+                            <td class="cell-whatsapp">
+                                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-share" title="Kongsi Rekod ke WhatsApp">
+                                    <i class="fa-brands fa-whatsapp"></i> SHARE TO WHATSAPP
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            /**
+             * 7. SIMPAN & KEMASKINI REKOD (SAVE / EDIT)
+             */
+            function handleFormSubmit(event) {
+                event.preventDefault();
+
+                const existingId = recordIdInput.value.trim();
+                const ambulanceName = ambulanceNameInput.value.trim();
+                const date = inspectionDateInput.value;
+                const day = getMalayDayFromDateString(date);
+                const time = inspectionTimeInput.value;
+                const officerName = officerNameInput.value.trim();
+
+                const oxy1_14 = oxy1_14Input.value.trim();
+                const oxy2_14 = oxy2_14Input.value.trim();
+                const oxy1_07 = oxy1_07Input.value.trim();
+
+const oxy1_07_second =
+    oxy1_07_secondInput.value.trim();
+
+const oxyPortable_07 =
+    oxyPortable_07Input.value.trim();
+                // Hanya maklumat ambulans dan petugas diwajibkan.
+// Bacaan PSI boleh dibiarkan kosong.
+
+if (!ambulanceName || !date || !time || !officerName) {
+    showToast('Sila lengkapkan maklumat ambulans dan petugas.', 'danger');
+    return;
+}
+                if (existingId) {
+                    // Kemaskini rekod asal (elak rekod berganda)
+                    const idx = records.findIndex(r => r.id === existingId);
+                    if (idx !== -1) {
+                        records[idx] = {
+                            ...records[idx],
+                            ambulanceName,
+                            date,
+                            day,
+                            time,
+                            officerName,
+                            oxy1_14: oxy1_14 === '' ? '' : Number(oxy1_14),
+oxy2_14: oxy2_14 === '' ? '' : Number(oxy2_14),
+oxy1_07: oxy1_07 === '' ? '' : Number(oxy1_07),
+oxy1_07_second: oxy1_07_second === '' ? '' : Number(oxy1_07_second),
+oxyPortable_07: oxyPortable_07 === '' ? '' : Number(oxyPortable_07),
+                            updatedAt: new Date().toISOString()
+                        };
+                        saveRecordsToStorage();
+                        showToast('Rekod pemeriksaan berjaya dikemaskini!', 'success');
+                    }
+                } else {
+                    // Cipta rekod baharu tanpa memadam rekod lama
+                    const newRecord = {
+                        id: generateUniqueId(),
+                        ambulanceName,
+                        date,
+                        day,
+                        time,
+                        officerName,
+                        oxy1_14: Number(oxy1_14),
+                        oxy2_14: Number(oxy2_14),
+                        oxy1_07: Number(oxy1_07),
+oxy1_07_second: Number(oxy1_07_second),
+oxyPortable_07: Number(oxyPortable_07),
+                        createdAt: new Date().toISOString()
+                    };
+                    records.unshift(newRecord);
+                    saveRecordsToStorage();
+                    showToast('Rekod pemeriksaan baharu berjaya disimpan!', 'success');
+                }
+
+                resetFormState();
+                updateDashboard();
+                renderRecordsTable();
+            }
+
+            function resetFormState(showNotification = false) {
+                oxygenForm.reset();
+                recordIdInput.value = '';
+                editBanner.classList.remove('active');
+                btnSaveText.textContent = 'SAVE RECORD';
+                setDefaultDateTime();
+                if (showNotification) {
+                    showToast('Borang telah dikosongkan.', 'info');
+                }
+            }
+
+            /**
+             * 8. TINDAKAN VIEW, EDIT & DELETE PADA JADUAL
+             */
+            function openEditMode(id) {
+                const record = records.find(r => r.id === id);
+                if (!record) return;
+
+                recordIdInput.value = record.id;
+                ambulanceNameInput.value = record.ambulanceName;
+                inspectionDateInput.value = record.date;
+                inspectionDayInput.value = record.day || getMalayDayFromDateString(record.date);
+                inspectionTimeInput.value = record.time;
+                officerNameInput.value = record.officerName;
+
+                oxy1_14Input.value = record.oxy1_14;
+                oxy2_14Input.value = record.oxy2_14;
+                oxy1_07Input.value = record.oxy1_07;
+
+oxy1_07_secondInput.value =
+    record.oxy1_07_second ?? '';
+
+oxyPortable_07Input.value =
+    record.oxyPortable_07;
+
+                editBanner.classList.add('active');
+                btnSaveText.textContent = 'UPDATE RECORD';
+
+                document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+                showToast('Mod edit diaktifkan. Ubah maklumat dan tekan UPDATE RECORD.', 'info');
+            }
+
+            function openViewModal(id) {
+                const record = records.find(r => r.id === id);
+                if (!record) return;
+
+                viewModalBody.innerHTML = `
+                    <div class="detail-grid">
+                        <div class="detail-item full">
+                            <div class="detail-label">Nama / Nombor Ambulans</div>
+                            <div class="detail-value" style="font-size: 1.15rem; color: var(--primary-blue);">
+                                <i class="fa-solid fa-truck-medical"></i> ${escapeHTML(record.ambulanceName)}
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tarikh & Hari</div>
+                            <div class="detail-value">${escapeHTML(formatDisplayDate(record.date))} (${escapeHTML(record.day)})</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Masa Pemeriksaan</div>
+                            <div class="detail-value">${escapeHTML(record.time)}</div>
+                        </div>
+                        <div class="detail-item full">
+                            <div class="detail-label">Nama Petugas Bertugas</div>
+                            <div class="detail-value">${escapeHTML(record.officerName)}</div>
+                        </div>
+                    </div>
+
+                    <div class="section-subtitle" style="margin-top: 0.5rem;">
+                        <i class="fa-solid fa-gauge-high"></i> Bacaan Tekanan Tong Oksigen
+                    </div>
+                    
+<div class="oxygen-detail-list">
+
+    <div class="oxygen-detail-row">
+        <span>1. Tong Oxygen 1 (1.4)</span>
+        <span>${record.oxy1_14 !== '' && record.oxy1_14 != null
+    ? escapeHTML(record.oxy1_14) + ' PSI'
+    : 'Tidak Diisi'}</span>  
+  </div>
+
+    <div class="oxygen-detail-row">
+        <span>2. Tong Oxygen 2 (1.4)</span>
+        <span>${escapeHTML(record.oxy2_14)} PSI</span>
+    </div>
+
+    <div class="oxygen-detail-row">
+        <span>3. Tong Oxygen 1 (0.7)</span>
+        <span>${escapeHTML(record.oxy1_07)} PSI</span>
+    </div>
+
+    <div class="oxygen-detail-row">
+        <span>4. Tong Oxygen 1 (0.7)</span>
+        <span>${escapeHTML(record.oxy1_07_second ?? '-')} PSI</span>
+    </div>
+
+    <div class="oxygen-detail-row">
+        <span>5. Tong Oxygen Portable HK Kecil (0.7)</span>
+        <span>${escapeHTML(record.oxyPortable_07)} PSI</span>
+    </div>
+
+</div>
+                `;
+
+                modalWhatsappBtn.href = buildWhatsAppShareUrl(record);
+                viewModal.classList.add('active');
+            }
+
+            function openDeleteModal(id) {
+                const record = records.find(r => r.id === id);
+                if (!record) return;
+
+                recordIdToDelete = id;
+                deleteRecordSummary.innerHTML = `
+                    Ambulans: ${escapeHTML(record.ambulanceName)}<br>
+                    Tarikh & Masa: ${escapeHTML(formatDisplayDate(record.date))} (${escapeHTML(record.time)})<br>
+                    Petugas: ${escapeHTML(record.officerName)}
+                `;
+                deleteModal.classList.add('active');
+            }
+
+            function confirmDeleteRecord() {
+                if (!recordIdToDelete) return;
+
+                records = records.filter(r => r.id !== recordIdToDelete);
+                saveRecordsToStorage();
+
+                // Jika rekod yang dipadam sedang diedit, reset borang
+                if (recordIdInput.value === recordIdToDelete) {
+                    resetFormState(false);
+                }
+
+                recordIdToDelete = null;
+                deleteModal.classList.remove('active');
+                updateDashboard();
+                renderRecordsTable();
+                showToast('Rekod berjaya dipadam daripada sistem.', 'danger');
+            }
+
+            /**
+             * 9. FUNGSI EXPORT CSV & PRINT / PDF
+             */
+            function exportRecordsToCsv() {
+                if (records.length === 0) {
+                    showToast('Tiada rekod untuk dieksport ke CSV.', 'danger');
+                    return;
+                }
+
+                const headers = [
+                    'Bil.',
+                    'Nama Ambulans',
+                    'Tarikh',
+                    'Hari',
+                    'Masa',
+                    'Nama Petugas',
+                    'Tong Oxygen 1 (1.4) [PSI]',
+                    'Tong Oxygen 2 (1.4) [PSI]',
+                    'Tong Oxygen 1 (0.7) [PSI]',
+                    'Tong Oxygen 1 (0.7) - Tong 4 [PSI]',
+                    'Tong Oxygen Portable HK Kecil (0.7) [PSI]'
+                ];
+
+                const csvRows = [headers.join(',')];
+
+                records.forEach((rec, index) => {
+                    const row = [
+                        index + 1,
+                        `"${String(rec.ambulanceName).replace(/"/g, '""')}"`,
+                        `"${formatDisplayDate(rec.date)}"`,
+                        `"${rec.day}"`,
+                        `"${rec.time}"`,
+                        `"${String(rec.officerName).replace(/"/g, '""')}"`,
+                        rec.oxy1_14,
+                        rec.oxy2_14,
+                        rec.oxy1_07,
+                        rec.oxy1_07_second ?? '',
+                        rec.oxyPortable_07
+                    ];
+                    csvRows.push(row.join(','));
+                });
+
+                const csvContent = '\uFEFF' + csvRows.join('\n');
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+
+                const link = document.createElement('a');
+                const dateStamp = new Date().toISOString().slice(0, 10);
+                link.href = url;
+                link.setAttribute('download', `Rekod_Oksigen_SJAM_${dateStamp}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                showToast('Fail CSV berjaya dimuat turun!', 'success');
+            }
+
+            /**
+             * 10. EVENT LISTENERS & INISIALISASI
+             */
+            function initApp() {
+                // Muat turun rekod daripada Local Storage & tetapkan tarikh/masa semasa
+                loadRecordsFromStorage();
+                setDefaultDateTime();
+                updateDashboard();
+                renderRecordsTable();
+
+                // Kemaskini Hari secara automatik apabila Tarikh ditukar
+                inspectionDateInput.addEventListener('change', function () {
+                    inspectionDayInput.value = getMalayDayFromDateString(this.value);
+                });
+
+                // Hantar Borang (Save / Update)
+                oxygenForm.addEventListener('submit', handleFormSubmit);
+
+                // Butang Clear Form
+                btnClearForm.addEventListener('click', function () {
+                    resetFormState(true);
+                });
+
+                // Butang Batal Edit
+                btnCancelEdit.addEventListener('click', function () {
+                    resetFormState(true);
+                });
+
+                // Carian Masa Nyata
+                searchInput.addEventListener('input', renderRecordsTable);
+                btnResetSearch.addEventListener('click', function () {
+                    searchInput.value = '';
+                    renderRecordsTable();
+                });
+
+                // Delegasi klik pada jadual untuk VIEW, EDIT, DELETE
+                recordsTableBody.addEventListener('click', function (e) {
+                    const btn = e.target.closest('button[data-action]');
+                    if (!btn) return;
+
+                    const action = btn.getAttribute('data-action');
+                    const id = btn.getAttribute('data-id');
+
+                    if (action === 'view') {
+                        openViewModal(id);
+                    } else if (action === 'edit') {
+                        openEditMode(id);
+                    } else if (action === 'delete') {
+                        openDeleteModal(id);
+                    }
+                });
+
+                // Kawalan Modal View
+                closeViewModal.addEventListener('click', () => viewModal.classList.remove('active'));
+                btnCloseViewFooter.addEventListener('click', () => viewModal.classList.remove('active'));
+                viewModal.addEventListener('click', (e) => {
+                    if (e.target === viewModal) viewModal.classList.remove('active');
+                });
+
+                // Kawalan Modal Delete
+                closeDeleteModal.addEventListener('click', () => deleteModal.classList.remove('active'));
+                btnCancelDelete.addEventListener('click', () => deleteModal.classList.remove('active'));
+                btnConfirmDelete.addEventListener('click', confirmDeleteRecord);
+                deleteModal.addEventListener('click', (e) => {
+                    if (e.target === deleteModal) deleteModal.classList.remove('active');
+                });
+
+                // Cetak / Simpan sebagai PDF
+                btnPrint.addEventListener('click', function () {
+                    window.print();
+                });
+
+                // Eksport CSV
+                btnExportCsv.addEventListener('click', exportRecordsToCsv);
+            }
+
+            // Jalankan aplikasi apabila DOM sedia
+            window.addEventListener('DOMContentLoaded', initApp);
+        })();
+    </script>
+</body>
+</html>
+
