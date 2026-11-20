@@ -704,7 +704,7 @@ body {
 }
 
 tbody td:nth-child(10)::before {
-    content: "Tong Oxygen 2 (0.7) - Tong 4";
+    <th>Tong Oxygen 1 (0.7) - Tong 4</th>
 }
 
 tbody td:nth-child(11)::before {
@@ -1520,19 +1520,40 @@ tbody td:nth-child(13)::before {
 <!-- ======================================================================
          VANILLA JAVASCRIPT (LOGIK LENGKAP APLIKASI)
          ====================================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script>
         /**
          * SISTEM KADAR ISIPADU TONG OXYGEN DI ATAS AMBULANS
          * St John Ambulans Malaysia
-         * Penyimpanan Data: Local Storage (Tiada data contoh dimasukkan)
-         */
+         * Penyimpanan Data: Firebase Cloud Firestore   
+      */
 
         (function () {
-            'use strict';
+    'use strict';
 
-            // Kunci Local Storage
-            const STORAGE_KEY = 'sjam_oxygen_psi_records_v1';
+    // FIREBASE CONFIGURATION
+    const firebaseConfig = {
+        apiKey: "AIzaSyDsOm3YMsml7gvI_cMg3t-0hCKhPvp9zSw",
+        authDomain: "kadar-oxygen-diatas-ambulans.firebaseapp.com",
+        projectId: "kadar-oxygen-diatas-ambulans",
+        storageBucket: "kadar-oxygen-diatas-ambulans.firebasestorage.app",
+        messagingSenderId: "371891361312",
+        appId: "1:371891361312:web:1650313ed96bcade09ce45"
+    };
 
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    // Initialize Firestore
+    const db = firebase.firestore();
+
+    // Nama collection
+    const recordsRef = db.collection('oxygenRecords');
+            
             // Senarai nama hari dalam Bahasa Melayu
             const MALAY_DAYS = [
                 'Ahad',
@@ -1674,32 +1695,44 @@ const oxyPortable_07Input =
             }
 
             /**
-             * 3. PENGURUSAN LOCAL STORAGE
-             */
-            function loadRecordsFromStorage() {
-                try {
-                    const raw = localStorage.getItem(STORAGE_KEY);
-                    if (raw) {
-                        const parsed = JSON.parse(raw);
-                        records = Array.isArray(parsed) ? parsed : [];
-                    } else {
-                        records = [];
-                    }
-                } catch (error) {
-                    console.error('Ralat membaca Local Storage:', error);
-                    records = [];
-                }
-            }
+ * 3. PENGURUSAN FIREBASE FIRESTORE
+ */
 
-            function saveRecordsToStorage() {
-                try {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-                } catch (error) {
-                    console.error('Ralat menyimpan ke Local Storage:', error);
-                    showToast('Gagal menyimpan data ke storan pelayar.', 'danger');
-                }
-            }
+// Mendapatkan rekod daripada Firebase secara masa nyata
+function loadRecordsFromFirebase() {
 
+    recordsRef.onSnapshot((snapshot) => {
+
+        records = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
+        // Susun rekod mengikut tarikh dan masa terkini
+        records.sort((a, b) => {
+            const dateA = `${a.date || ''} ${a.time || ''}`;
+            const dateB = `${b.date || ''} ${b.time || ''}`;
+
+            return dateB.localeCompare(dateA);
+        });
+
+        updateDashboard();
+        renderRecordsTable();
+
+        console.log('Rekod Firebase berjaya dikemaskini.');
+
+    }, (error) => {
+
+        console.error('Firebase Error:', error);
+
+        showToast(
+            'Gagal mendapatkan rekod daripada Firebase.',
+            'danger'
+        );
+
+    });
+
+}
             /**
              * 4. KEMASKINI DASHBOARD STATISTIK
              */
@@ -1835,79 +1868,118 @@ const oxyPortable_07Input =
             /**
              * 7. SIMPAN & KEMASKINI REKOD (SAVE / EDIT)
              */
-            function handleFormSubmit(event) {
-                event.preventDefault();
+            /**
+ * 7. SIMPAN DAN KEMASKINI REKOD FIREBASE
+ */
 
-                const existingId = recordIdInput.value.trim();
-                const ambulanceName = ambulanceNameInput.value.trim();
-                const date = inspectionDateInput.value;
-                const day = getMalayDayFromDateString(date);
-                const time = inspectionTimeInput.value;
-                const officerName = officerNameInput.value.trim();
+async function handleFormSubmit(event) {
 
-                const oxy1_14 = oxy1_14Input.value.trim();
-                const oxy2_14 = oxy2_14Input.value.trim();
-                const oxy1_07 = oxy1_07Input.value.trim();
+    event.preventDefault();
 
-const oxy1_07_second =
-    oxy1_07_secondInput.value.trim();
+    const existingId = recordIdInput.value.trim();
 
-const oxyPortable_07 =
-    oxyPortable_07Input.value.trim();
-                // Hanya maklumat ambulans dan petugas diwajibkan.
-// Bacaan PSI boleh dibiarkan kosong.
+    const ambulanceName = ambulanceNameInput.value.trim();
+    const date = inspectionDateInput.value;
+    const day = getMalayDayFromDateString(date);
+    const time = inspectionTimeInput.value;
+    const officerName = officerNameInput.value.trim();
 
-if (!ambulanceName || !date || !time || !officerName) {
-    showToast('Sila lengkapkan maklumat ambulans dan petugas.', 'danger');
-    return;
+    const oxy1_14 = oxy1_14Input.value.trim();
+    const oxy2_14 = oxy2_14Input.value.trim();
+    const oxy1_07 = oxy1_07Input.value.trim();
+
+    const oxy1_07_second =
+        oxy1_07_secondInput.value.trim();
+
+    const oxyPortable_07 =
+        oxyPortable_07Input.value.trim();
+
+    // Hanya maklumat ambulans dan petugas diwajibkan
+    // Bacaan PSI boleh dibiarkan kosong
+
+    if (!ambulanceName || !date || !time || !officerName) {
+
+        showToast(
+            'Sila lengkapkan maklumat ambulans dan petugas.',
+            'danger'
+        );
+
+        return;
+    }
+
+    // Data pemeriksaan
+    const recordData = {
+
+        ambulanceName,
+        date,
+        day,
+        time,
+        officerName,
+
+        oxy1_14: oxy1_14 === '' ? '' : Number(oxy1_14),
+
+        oxy2_14: oxy2_14 === '' ? '' : Number(oxy2_14),
+
+        oxy1_07: oxy1_07 === '' ? '' : Number(oxy1_07),
+
+        oxy1_07_second:
+            oxy1_07_second === '' ? '' : Number(oxy1_07_second),
+
+        oxyPortable_07:
+            oxyPortable_07 === '' ? '' : Number(oxyPortable_07),
+
+        updatedAt: new Date().toISOString()
+
+    };
+
+    try {
+
+        if (existingId) {
+
+            // UPDATE REKOD SEDIA ADA
+            await recordsRef.doc(existingId).set(
+                recordData,
+                { merge: true }
+            );
+
+            showToast(
+                'Rekod berjaya dikemaskini!',
+                'success'
+            );
+
+        } else {
+
+            // SAVE REKOD BAHARU
+            const newId = generateUniqueId();
+
+            recordData.createdAt = new Date().toISOString();
+
+            await recordsRef.doc(newId).set(recordData);
+
+            showToast(
+                'Rekod baharu berjaya disimpan ke Firebase!',
+                'success'
+            );
+
+        }
+
+        resetFormState();
+
+        // Dashboard dan History akan dikemaskini
+        // secara automatik melalui onSnapshot()
+
+    } catch (error) {
+
+        console.error('Ralat Firebase:', error);
+
+        showToast(
+            'Gagal menyimpan rekod. Sila cuba semula.',
+            'danger'
+        );
+
+    }
+
 }
-                if (existingId) {
-                    // Kemaskini rekod asal (elak rekod berganda)
-                    const idx = records.findIndex(r => r.id === existingId);
-                    if (idx !== -1) {
-                        records[idx] = {
-                            ...records[idx],
-                            ambulanceName,
-                            date,
-                            day,
-                            time,
-                            officerName,
-                            oxy1_14: oxy1_14 === '' ? '' : Number(oxy1_14),
-oxy2_14: oxy2_14 === '' ? '' : Number(oxy2_14),
-oxy1_07: oxy1_07 === '' ? '' : Number(oxy1_07),
-oxy1_07_second: oxy1_07_second === '' ? '' : Number(oxy1_07_second),
-oxyPortable_07: oxyPortable_07 === '' ? '' : Number(oxyPortable_07),
-                            updatedAt: new Date().toISOString()
-                        };
-                        saveRecordsToStorage();
-                        showToast('Rekod pemeriksaan berjaya dikemaskini!', 'success');
-                    }
-                } else {
-                    // Cipta rekod baharu tanpa memadam rekod lama
-                    const newRecord = {
-                        id: generateUniqueId(),
-                        ambulanceName,
-                        date,
-                        day,
-                        time,
-                        officerName,
-                        oxy1_14: Number(oxy1_14),
-                        oxy2_14: Number(oxy2_14),
-                        oxy1_07: Number(oxy1_07),
-oxy1_07_second: Number(oxy1_07_second),
-oxyPortable_07: Number(oxyPortable_07),
-                        createdAt: new Date().toISOString()
-                    };
-                    records.unshift(newRecord);
-                    saveRecordsToStorage();
-                    showToast('Rekod pemeriksaan baharu berjaya disimpan!', 'success');
-                }
-
-                resetFormState();
-                updateDashboard();
-                renderRecordsTable();
-            }
-
             function resetFormState(showNotification = false) {
                 oxygenForm.reset();
                 recordIdInput.value = '';
@@ -1933,15 +2005,17 @@ oxyPortable_07: Number(oxyPortable_07),
                 inspectionTimeInput.value = record.time;
                 officerNameInput.value = record.officerName;
 
-                oxy1_14Input.value = record.oxy1_14;
-                oxy2_14Input.value = record.oxy2_14;
-                oxy1_07Input.value = record.oxy1_07;
+                oxy1_14Input.value = record.oxy1_14 ?? '';
+
+oxy2_14Input.value = record.oxy2_14 ?? '';
+
+oxy1_07Input.value = record.oxy1_07 ?? '';
 
 oxy1_07_secondInput.value =
     record.oxy1_07_second ?? '';
 
 oxyPortable_07Input.value =
-    record.oxyPortable_07;
+    record.oxyPortable_07 ?? '';
 
                 editBanner.classList.add('active');
                 btnSaveText.textContent = 'UPDATE RECORD';
@@ -1949,6 +2023,12 @@ oxyPortable_07Input.value =
                 document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
                 showToast('Mod edit diaktifkan. Ubah maklumat dan tekan UPDATE RECORD.', 'info');
             }
+
+function formatPsi(value) {
+    return value !== '' && value != null
+        ? escapeHTML(value) + ' PSI'
+        : 'Tidak Diisi';
+}
 
             function openViewModal(id) {
                 const record = records.find(r => r.id === id);
@@ -1979,38 +2059,35 @@ oxyPortable_07Input.value =
                     <div class="section-subtitle" style="margin-top: 0.5rem;">
                         <i class="fa-solid fa-gauge-high"></i> Bacaan Tekanan Tong Oksigen
                     </div>
-                    
-<div class="oxygen-detail-list">
+     <div class="oxygen-detail-list">
 
     <div class="oxygen-detail-row">
         <span>1. Tong Oxygen 1 (1.4)</span>
-        <span>${record.oxy1_14 !== '' && record.oxy1_14 != null
-    ? escapeHTML(record.oxy1_14) + ' PSI'
-    : 'Tidak Diisi'}</span>  
-  </div>
+        <span>${formatPsi(record.oxy1_14)}</span>
+    </div>
 
     <div class="oxygen-detail-row">
         <span>2. Tong Oxygen 2 (1.4)</span>
-        <span>${escapeHTML(record.oxy2_14)} PSI</span>
+        <span>${formatPsi(record.oxy2_14)}</span>
     </div>
 
     <div class="oxygen-detail-row">
         <span>3. Tong Oxygen 1 (0.7)</span>
-        <span>${escapeHTML(record.oxy1_07)} PSI</span>
+        <span>${formatPsi(record.oxy1_07)}</span>
     </div>
 
     <div class="oxygen-detail-row">
-        <span>4. Tong Oxygen 1 (0.7)</span>
-        <span>${escapeHTML(record.oxy1_07_second ?? '-')} PSI</span>
+        <span>4. Tong Oxygen 2 (0.7)</span>
+        <span>${formatPsi(record.oxy1_07_second)}</span>
     </div>
 
     <div class="oxygen-detail-row">
         <span>5. Tong Oxygen Portable HK Kecil (0.7)</span>
-        <span>${escapeHTML(record.oxyPortable_07)} PSI</span>
+        <span>${formatPsi(record.oxyPortable_07)}</span>
     </div>
 
-</div>
-                `;
+</div>    
+            `;
 
                 modalWhatsappBtn.href = buildWhatsAppShareUrl(record);
                 viewModal.classList.add('active');
@@ -2029,24 +2106,46 @@ oxyPortable_07Input.value =
                 deleteModal.classList.add('active');
             }
 
-            function confirmDeleteRecord() {
-                if (!recordIdToDelete) return;
+            /**
+ * DELETE REKOD DARIPADA FIREBASE
+ */
 
-                records = records.filter(r => r.id !== recordIdToDelete);
-                saveRecordsToStorage();
+async function confirmDeleteRecord() {
 
-                // Jika rekod yang dipadam sedang diedit, reset borang
-                if (recordIdInput.value === recordIdToDelete) {
-                    resetFormState(false);
-                }
+    if (!recordIdToDelete) return;
 
-                recordIdToDelete = null;
-                deleteModal.classList.remove('active');
-                updateDashboard();
-                renderRecordsTable();
-                showToast('Rekod berjaya dipadam daripada sistem.', 'danger');
-            }
+    try {
 
+        await recordsRef.doc(recordIdToDelete).delete();
+
+        // Jika rekod yang dipadam sedang diedit
+        if (recordIdInput.value === recordIdToDelete) {
+            resetFormState(false);
+        }
+
+        recordIdToDelete = null;
+
+        deleteModal.classList.remove('active');
+
+        showToast(
+            'Rekod berjaya dipadam daripada Firebase.',
+            'success'
+        );
+
+        // History dan Dashboard dikemaskini melalui onSnapshot()
+
+    } catch (error) {
+
+        console.error('Ralat memadam rekod:', error);
+
+        showToast(
+            'Gagal memadam rekod daripada Firebase.',
+            'danger'
+        );
+
+    }
+
+}
             /**
              * 9. FUNGSI EXPORT CSV & PRINT / PDF
              */
@@ -2110,7 +2209,7 @@ oxyPortable_07Input.value =
              */
             function initApp() {
                 // Muat turun rekod daripada Local Storage & tetapkan tarikh/masa semasa
-                loadRecordsFromStorage();
+                loadRecordsFromFirebase();
                 setDefaultDateTime();
                 updateDashboard();
                 renderRecordsTable();
