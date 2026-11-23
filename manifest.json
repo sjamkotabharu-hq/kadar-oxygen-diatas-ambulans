@@ -1,0 +1,31 @@
+
+{
+  "id": "./",
+  "name": "KADAR ISIPADU TONG OXYGEN DI ATAS AMBULANS",
+  "short_name": "Oxygen SJAM",
+  "description": "Sistem Pemantauan dan Rekod PSI Tong Oksigen Ambulans St John Ambulans Malaysia",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F1F5F9",
+  "theme_color": "#0A2540",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
