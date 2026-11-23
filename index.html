@@ -588,6 +588,88 @@ body {
         }
 
 
+/* ==========================================
+   FILTER BULAN DAN TAHUN
+   ========================================== */
+
+.history-filter-container {
+    background: #f8fafc;
+    border: 1px solid #dce5ee;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.history-filter-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #0a2540;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.history-filter-heading i {
+    color: #0ea5e9;
+    font-size: 1.15rem;
+}
+
+.history-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.history-filter-grid select {
+    cursor: pointer;
+    background-color: #ffffff;
+    font-weight: 600;
+}
+
+.history-filter-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid #e2e8f0;
+}
+
+#selectedPeriodLabel {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0a2540;
+}
+
+#monthlyRecordCount {
+    background: #e0f2fe;
+    color: #0a2540;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 600px) {
+    .history-filter-container {
+        padding: 14px;
+    }
+
+    .history-filter-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .history-filter-summary {
+        align-items: flex-start;
+    }
+}
+
+
+
 /* ==========================================================================
    7. HISTORY RECORDS - RESPONSIVE CARD DESIGN
    Tiada horizontal scrolling, tiada tajuk bertindih
@@ -1149,6 +1231,47 @@ tbody td:nth-child(13)::before {
             }
         }
 
+
+/* CETAK REKOD BULAN YANG DIPILIH */
+@media print {
+
+    .history-filter-container {
+        background: #ffffff !important;
+        border: 1px solid #cccccc;
+    }
+
+    .history-filter-grid {
+        display: none !important;
+    }
+
+    .history-filter-heading {
+        display: none !important;
+    }
+
+    .history-filter-summary {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    #recordsTable tbody tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #cccccc;
+        margin-bottom: 12px;
+    }
+
+    #recordsTable tbody td {
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    #recordsTable tbody td.cell-tindakan,
+    #recordsTable tbody td.cell-whatsapp {
+        display: none !important;
+    }
+}
+
+
 /* RESPONSIVE UNTUK TELEFON */
 @media screen and (max-width: 600px) {
 
@@ -1451,6 +1574,55 @@ tbody td:nth-child(13)::before {
                 </span>
             </div>
             <div class="card-body">
+
+<!-- FILTER REKOD BULAN DAN TAHUN -->
+<div class="history-filter-container">
+
+    <div class="history-filter-heading">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Tapis Rekod Mengikut Bulan & Tahun</span>
+    </div>
+
+    <div class="history-filter-grid">
+
+        <div class="form-group">
+            <label for="filterMonth">Pilih Bulan</label>
+            <select id="filterMonth" class="form-control">
+                <option value="01">Januari</option>
+                <option value="02">Februari</option>
+                <option value="03">Mac</option>
+                <option value="04">April</option>
+                <option value="05">Mei</option>
+                <option value="06">Jun</option>
+                <option value="07">Julai</option>
+                <option value="08">Ogos</option>
+                <option value="09">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Disember</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="filterYear">Pilih Tahun</label>
+            <select id="filterYear" class="form-control">
+            </select>
+        </div>
+
+    </div>
+
+    <div class="history-filter-summary">
+        <span id="selectedPeriodLabel">
+            Memuatkan rekod...
+        </span>
+
+        <span id="monthlyRecordCount">
+            0 Rekod
+        </span>
+    </div>
+
+</div>
+
                 <!-- Bar Carian -->
                 <div class="search-bar-container">
                     <div class="search-input-box">
@@ -1629,6 +1801,103 @@ const oxyPortable_07Input =
             const recordsTableBody = document.getElementById('recordsTableBody');
             const recordCountBadge = document.getElementById('recordCountBadge');
 
+// FILTER BULAN DAN TAHUN
+const filterMonth = document.getElementById('filterMonth');
+const filterYear = document.getElementById('filterYear');
+
+const selectedPeriodLabel =
+    document.getElementById('selectedPeriodLabel');
+
+const monthlyRecordCount =
+    document.getElementById('monthlyRecordCount');
+
+const MALAY_MONTHS = [
+    'Januari', 'Februari', 'Mac', 'April',
+    'Mei', 'Jun', 'Julai', 'Ogos',
+    'September', 'Oktober', 'November', 'Disember'
+];
+
+// Tetapkan bulan dan tahun semasa
+function initializeHistoryFilters() {
+    const now = new Date();
+
+    filterMonth.value =
+        String(now.getMonth() + 1).padStart(2, '0');
+
+    updateYearOptions();
+}
+
+// Senarai tahun daripada Firebase dan tahun semasa
+function updateYearOptions() {
+    const currentYear = new Date().getFullYear();
+    const previousSelection = filterYear.value;
+
+    const years = new Set([currentYear]);
+
+    records.forEach(rec => {
+        if (typeof rec.date === 'string' &&
+            /^\d{4}-\d{2}-\d{2}$/.test(rec.date)) {
+            years.add(Number(rec.date.slice(0, 4)));
+        }
+    });
+
+    const sortedYears = [...years].sort((a, b) => b - a);
+
+    filterYear.innerHTML = sortedYears.map(year =>
+        `<option value="${year}">${year}</option>`
+    ).join('');
+
+    if (previousSelection &&
+        years.has(Number(previousSelection))) {
+        filterYear.value = previousSelection;
+    } else {
+        filterYear.value = String(currentYear);
+    }
+}
+
+// Dapatkan rekod mengikut bulan, tahun dan carian
+function getFilteredRecords() {
+    const month = filterMonth.value;
+    const year = filterYear.value;
+    const query = searchInput.value.trim().toLowerCase();
+
+    return records.filter(rec => {
+        const date = String(rec.date || '');
+
+        const matchesPeriod =
+            date.startsWith(`${year}-${month}-`);
+
+        if (!matchesPeriod) return false;
+
+        if (!query) return true;
+
+        const ambulance =
+            String(rec.ambulanceName || '').toLowerCase();
+
+        const officer =
+            String(rec.officerName || '').toLowerCase();
+
+        return (
+            ambulance.includes(query) ||
+            officer.includes(query) ||
+            date.includes(query) ||
+            formatDisplayDate(date).includes(query)
+        );
+    });
+}
+
+// Papar maklumat bulan yang dipilih
+function updateHistoryFilterSummary(count) {
+    const monthIndex = Number(filterMonth.value) - 1;
+    const monthName = MALAY_MONTHS[monthIndex] || '';
+
+    selectedPeriodLabel.textContent =
+        `${monthName} ${filterYear.value}`;
+
+    monthlyRecordCount.textContent = `${count} Rekod`;
+}
+
+
             // Rujukan Elemen Dashboard
             const statTotalRecords = document.getElementById('statTotalRecords');
             const statTotalAmbulances = document.getElementById('statTotalAmbulances');
@@ -1747,10 +2016,13 @@ function loadRecordsFromFirebase() {
             return dateB.localeCompare(dateA);
         });
 
-        updateDashboard();
-        renderRecordsTable();
+        
+updateYearOptions();
+updateDashboard();
+renderRecordsTable();
 
-        console.log('Rekod Firebase berjaya dikemaskini.');
+console.log('Rekod Anda berjaya dikemaskini.');
+
 
     }, (error) => {
 
@@ -1823,18 +2095,21 @@ function loadRecordsFromFirebase() {
              * 6. PAPARAN JADUAL REKOD (DENGAN PENGASINGAN RUANGAN TINDAKAN & SHARE WHATSAPP)
              */
             function renderRecordsTable() {
-                const query = searchInput.value.trim().toLowerCase();
-                btnResetSearch.style.display = query ? 'inline-flex' : 'none';
+                
+const query = searchInput.value.trim().toLowerCase();
 
-                const filteredRecords = records.filter(rec => {
-                    if (!query) return true;
-                    const ambMatch = rec.ambulanceName.toLowerCase().includes(query);
-                    const dateMatch = rec.date.toLowerCase().includes(query) || formatDisplayDate(rec.date).includes(query);
-                    const officerMatch = rec.officerName.toLowerCase().includes(query);
-                    return ambMatch || dateMatch || officerMatch;
-                });
+btnResetSearch.style.display =
+    query ? 'inline-flex' : 'none';
 
-                recordCountBadge.textContent = `${filteredRecords.length} Rekod`;
+// Tapis mengikut bulan, tahun dan carian
+const filteredRecords = getFilteredRecords();
+
+// Kemas kini jumlah rekod yang dipaparkan
+recordCountBadge.textContent =
+    `${filteredRecords.length} Rekod`;
+
+updateHistoryFilterSummary(filteredRecords.length);
+
 
                 if (filteredRecords.length === 0) {
                     recordsTableBody.innerHTML = `
@@ -1842,7 +2117,7 @@ function loadRecordsFromFirebase() {
                             <td colspan="13">               
                  <div class="empty-state">
                                     <i class="fa-solid fa-folder-open"></i>
-                                    <p>${query ? 'Tiada rekod sepadan dengan carian anda.' : 'Belum ada rekod pemeriksaan disimpan.'}</p>
+                                    <p>${query ? 'Tiada rekod sepadan dengan carian anda.' : 'Tiada rekod pemeriksaan untuk bulan dan tahun yang dipilih.'}</p>
                                     <span>${query ? 'Sila cuba kata kunci nama ambulans, tarikh, atau petugas lain.' : 'Sila lengkapkan borang di atas dan tekan SAVE RECORD.'}</span>
                                 </div>
                             </td>
@@ -2181,7 +2456,11 @@ async function confirmDeleteRecord() {
              * 9. FUNGSI EXPORT CSV & PRINT / PDF
              */
             function exportRecordsToCsv() {
-                if (records.length === 0) {
+                
+const exportRecords = getFilteredRecords();
+
+if (exportRecords.length === 0) {
+
                     showToast('Tiada rekod untuk dieksport ke CSV.', 'danger');
                     return;
                 }
@@ -2202,7 +2481,7 @@ async function confirmDeleteRecord() {
 
                 const csvRows = [headers.join(',')];
 
-                records.forEach((rec, index) => {
+                exportRecords.forEach((rec, index) => {
                     const row = [
                         index + 1,
                         `"${String(rec.ambulanceName).replace(/"/g, '""')}"`,
@@ -2226,7 +2505,10 @@ async function confirmDeleteRecord() {
                 const link = document.createElement('a');
                 const dateStamp = new Date().toISOString().slice(0, 10);
                 link.href = url;
-                link.setAttribute('download', `Rekod_Oksigen_SJAM_${dateStamp}.csv`);
+                link.setAttribute(
+    'download',
+    `Rekod_Oksigen_SJAM_${filterYear.value}_${filterMonth.value}.csv`
+);
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -2240,10 +2522,12 @@ async function confirmDeleteRecord() {
              */
             function initApp() {
                 // Muat turun rekod daripada Local Storage & tetapkan tarikh/masa semasa
-                loadRecordsFromFirebase();
-                setDefaultDateTime();
-                updateDashboard();
-                renderRecordsTable();
+                
+initializeHistoryFilters();
+loadRecordsFromFirebase();
+setDefaultDateTime();
+updateDashboard();
+renderRecordsTable();
 
                 // Kemaskini Hari secara automatik apabila Tarikh ditukar
                 inspectionDateInput.addEventListener('change', function () {
@@ -2264,6 +2548,17 @@ async function confirmDeleteRecord() {
                 });
 
                 // Carian Masa Nyata
+
+// Tukar bulan - rekod terus dikemaskini
+filterMonth.addEventListener('change', function () {
+    renderRecordsTable();
+});
+
+// Tukar tahun - rekod terus dikemaskini
+filterYear.addEventListener('change', function () {
+    renderRecordsTable();
+});
+
                 searchInput.addEventListener('input', renderRecordsTable);
                 btnResetSearch.addEventListener('click', function () {
                     searchInput.value = '';
