@@ -1,15 +1,16 @@
 
-const CACHE_NAME = "sjam-oxygen-v2";
+const CACHE_NAME = "sjam-oxygen-v3";
 
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
     "./manifest.json",
-    "./icons/icon-192.png",
-    "./icons/icon-512.png",
-    "./icons/icon-maskable-512.png"
+    "./icon-192.png",
+    "./icon-512.png",
+    "./icon-maskable-512.png"
 ];
 
+// INSTALL SERVICE WORKER
 self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -18,6 +19,7 @@ self.addEventListener("install", event => {
     );
 });
 
+// ACTIVATE SERVICE WORKER
 self.addEventListener("activate", event => {
     event.waitUntil(
         caches.keys().then(keys =>
@@ -30,8 +32,8 @@ self.addEventListener("activate", event => {
     );
 });
 
+// FETCH REQUESTS
 self.addEventListener("fetch", event => {
-
     if (
         event.request.method !== "GET" ||
         new URL(event.request.url).origin !== self.location.origin
@@ -44,5 +46,4 @@ self.addEventListener("fetch", event => {
             caches.match(event.request)
         )
     );
-
 });
