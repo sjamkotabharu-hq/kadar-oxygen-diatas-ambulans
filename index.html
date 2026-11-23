@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#0A2540">
+<link rel="apple-touch-icon"
+      href="./icons/icon-192.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kadar Isipadu Tong Oxygen Di Atas Ambulans - St John Ambulans Malaysia</title>
@@ -2284,5 +2288,15 @@ async function confirmDeleteRecord() {
             window.addEventListener('DOMContentLoaded', initApp);
         })();
     </script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(
+      "./service-worker.js"
+    );
+  });
+}
+</script>
 </body>
 </html>
+
